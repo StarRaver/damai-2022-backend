@@ -15,9 +15,14 @@ class ExchangeResource extends JsonResource
      *
      * @return array|Arrayable|\JsonSerializable
      */
+    public static $wrap = null;
     public function toArray($request)
     {
         // TODO: response data {"exchange_rate": 0.25, "udpated_at": "2022-01-01 23:59:59"}
-        return [];
+        if(!empty($this->error)){
+            return ["error"=> $this->error, "udpated_at"=> $this->updated_at];
+        } else {
+            return ["exchange_rate"=> $this->exchange_rate, "udpated_at"=> $this->updated_at];
+        }
     }
 }
