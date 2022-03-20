@@ -19,9 +19,11 @@ class ExchangeService
 
     public function getExchangeRate(string $from, string $to, $amount = 1)
     {
+        $from = strtoupper($from);
         if(!in_array($from, array_values($this->currencyRepo->getCurrencyList()))){
             return ["error" => "Input 'from' error"];
         }
+        $to = strtoupper($to);
         if(!in_array($to, array_values($this->currencyRepo->getCurrencyList()))){
             return ["error" => "Input 'to' error"];
         }
